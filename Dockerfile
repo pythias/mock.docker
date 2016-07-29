@@ -10,7 +10,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/vhost.conf /etc/nginx/conf.d/vhost.conf
 
 # supervisor
-RUN apt-get install -y supervisor wget unzip git
+RUN apt-get install -y supervisor wget unzip
 RUN mkdir -p /var/log/supervisor
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -41,7 +41,10 @@ RUN wget https://getcomposer.org/download/1.2.0/composer.phar -O /usr/local/bin/
 RUN chmod 755 /usr/local/bin/composer
 
 # htdocs
-RUN git clone https://github.com/pythias/mock.server /var/www/html/
+RUN wget https://codeload.github.com/pythias/mock.server/zip/master -O /home/mock.server-master.zip
+RUN unzip /home/mock.server-master.zip /home && rm -f /home/mock.server-master.zip
+COPY /home/mock.server-master/ /var/www/html/
+#RUN git clone https://github.com/pythias/mock.server /var/www/html/
 RUN cd /var/www/html/ && composer install --no-plugins --no-scripts && composer update --no-plugins --no-scripts
 
 # daemons
