@@ -5,7 +5,8 @@ Mock server docker
 
 ```
 docker pull pythias/mock.server
-docker run -p 80:80 pythias/mock.server
+docker create --name mock.server -it -p 80:80 pythias/mock.server
+docker start mock.server
 ```
 
 ## Syntax
