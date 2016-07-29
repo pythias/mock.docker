@@ -1,8 +1,16 @@
 FROM php:7-fpm
 MAINTAINER pythias <pythias@gmail.com>
 
+# nginx
+RUN apt-get update && apt-get install -y nginx
+RUN mkdir -p /var/log/www
+RUN mkdir -p /var/log/nginx
+RUN mkdir -p /var/data
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/vhost.conf /etc/nginx/conf.d/vhost.conf
+
 # supervisor
-RUN apt-get update && apt-get install -y supervisor wget unzip git
+RUN apt-get install -y supervisor wget unzip git
 RUN mkdir -p /var/log/supervisor
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -10,6 +18,7 @@ COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN wget http://download.redis.io/releases/redis-3.2.1.tar.gz -O /home/redis-3.2.1.tar.gz
 RUN cd /home && tar xzf redis-3.2.1.tar.gz && cd redis-3.2.1 && make && make install
 RUN rm -f /home/redis-3.2.1.tar.gz
+COPY conf/redis.conf /etc/redis.conf
 
 # redis ext
 RUN wget https://pecl.php.net/get/redis-3.0.0.tgz -O /home/redis-3.0.0.tgz
