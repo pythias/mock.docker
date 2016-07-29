@@ -1,0 +1,12 @@
+php:
+  build: .
+  ports:
+    - "9000"
+    - "6379"
+
+nginx:
+  build: ./nginx
+  ports:
+    - "80:80"
+  links:
+    - php
