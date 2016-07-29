@@ -41,4 +41,6 @@ RUN chmod 755 /usr/local/bin/daemons.sh
 
 EXPOSE 9000 6379 80
 
-CMD ["/usr/bin/supervisord"]
+WORKDIR /var/www/html/
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

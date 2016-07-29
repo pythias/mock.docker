@@ -3,6 +3,8 @@ mock server docker
 
 ## docker
 
+docker pull pythias/mock.server
+
 ## Syntax
 
 [Mock.PHP](https://github.com/pythias/mock)
