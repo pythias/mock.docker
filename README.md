@@ -1,9 +1,12 @@
-# mock.docker
-mock server docker
+# Mock.Docker
+Mock server docker
 
-## docker
+## Docker
 
+```
 docker pull pythias/mock.server
+docker run -p 80:80 pythias/mock.server
+```
 
 ## Syntax
 
