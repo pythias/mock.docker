@@ -42,7 +42,7 @@ RUN chmod 755 /usr/local/bin/composer
 
 # htdocs
 RUN wget https://codeload.github.com/pythias/mock.server/zip/master -O /home/mock.server-master.zip
-RUN unzip /home/mock.server-master.zip /home && rm -f /home/mock.server-master.zip
+RUN cd /home && unzip mock.server-master.zip && rm -f /home/mock.server-master.zip
 COPY /home/mock.server-master/ /var/www/html/
 #RUN git clone https://github.com/pythias/mock.server /var/www/html/
 RUN cd /var/www/html/ && composer install --no-plugins --no-scripts && composer update --no-plugins --no-scripts
